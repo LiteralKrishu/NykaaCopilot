@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>Nykaa: Buy Cosmetics, Products & Beauty Online | AI Look Copilot</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Optional MediaPipe FaceMesh loaded asynchronously for Virtual Try-On -->
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. TOP ANNOUNCEMENT & UTILITY BAR (Nykaa Standard Desktop)
+       ========================================================================= -->
+  <div class="top-announcement">
+    <span>✨ GRAND BEAUTY FESTIVAL: Up to 50% Off on Top Global Brands + Free Gift with Every Order! <a href="#">Shop Now</a></span>
+  </div>
+
+  <div class="top-utility-strip">
+    <div class="utility-container">
+      <div class="utility-left">
+        <a href="#" class="utility-link">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          Get App
+        </a>
+        <a href="#" class="utility-link">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Store & Events
+        </a>
+        <a href="#" class="utility-link">Gift Cards</a>
+        <a href="#" class="utility-link">Help</a>
+      </div>
+      <div class="utility-right">
+        <a href="#" class="utility-link">Nykaa Man</a>
+        <a href="#" class="utility-link">Nykaa Fashion</a>
+        <a href="#" class="utility-link">Beauty Advice</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. PRIMARY STICKY HEADER (Original Logo, Search, Copilot, Bag)
+       ========================================================================= -->
+  <header class="main-header">
+    <div class="header-inner">
+      <!-- Original Nykaa Logo -->
+      <a href="#" class="brand-logo-wrap" title="Nykaa Homepage">
+        <img src="nykaa-logo.svg" alt="Nykaa" class="brand-logo-svg">
+      </a>
+
+      <!-- Category Navigation Links -->
+      <nav class="nav-categories-strip">
+        <a href="#" class="nav-cat-item active">Categories</a>
+        <a href="#" class="nav-cat-item">Brands</a>
+        <a href="#" class="nav-cat-item">Luxe</a>
+        <a href="#" class="nav-cat-item">Nykaa Fashion</a>
+        <a href="#" class="nav-cat-item">Beauty Advice</a>
+      </nav>
+
+      <!-- Global Predictive Search -->
+      <div class="header-search-wrap">
+        <div class="header-search-box">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="nykaa-global-search" class="header-search-input" placeholder="Search on Nykaa (e.g. Lipstick, Kay Beauty, Nude...)">
+        </div>
+      </div>
+
+      <!-- Copilot Trigger Button (Header Feature Anchor) -->
+      <button class="copilot-header-btn" onclick="openCopilotModal(1)" title="Open AI Beauty Copilot">
+        <span class="copilot-badge-sparkle">✦</span>
+        <span>From Look to Products</span>
+      </button>
+
+      <!-- User Actions: Account & Bag -->
+      <div class="header-actions">
+        <button class="header-action-btn" title="Sign In">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          <span>Sign In</span>
+        </button>
+
+        <button class="header-action-btn" onclick="openCartDrawer()" title="Shopping Bag">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span>Bag</span>
+          <span class="cart-count-badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Secondary Mega-Menu Navigation Bar -->
+  <div class="secondary-nav">
+    <div class="sec-nav-inner">
+      <a href="#" class="sec-nav-link highlight">Makeup</a>
+      <a href="#" class="sec-nav-link">Skin</a>
+      <a href="#" class="sec-nav-link">Hair</a>
+      <a href="#" class="sec-nav-link">Appliances</a>
+      <a href="#" class="sec-nav-link">Bath & Body</a>
+      <a href="#" class="sec-nav-link">Natural</a>
+      <a href="#" class="sec-nav-link">Mom & Baby</a>
+      <a href="#" class="sec-nav-link">Health & Wellness</a>
+      <a href="#" class="sec-nav-link">Men</a>
+      <a href="#" class="sec-nav-link">Fragrance</a>
+      <a href="#" class="sec-nav-link highlight">Pop Ups</a>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. HOMEPAGE CONTENT: HERO BANNER & COPILOT HIGHLIGHT PROMO
+       ========================================================================= -->
+  <main class="page-container">
+
+    <!-- Hero Banner Slider -->
+    <section class="hero-banner-section">
+      <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('assets/images/hero-banner-1.jpg');">
+          <div class="hero-overlay">
+            <div class="hero-content">
+              <span class="hero-badge">Curated Collection</span>
+              <h1 class="hero-title">The Grand Lipstick Festival</h1>
+              <p class="hero-desc">Experience iconic shades from M.A.C, Kay Beauty, Charlotte Tilbury & more with instant AR Virtual Try-On.</p>
+              <button class="hero-cta-btn" onclick="openCopilotModal(1)">
+                <span>Try "From Look to Products"</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-slide" style="background-image: url('assets/images/hero-banner-2.jpg');">
+          <div class="hero-overlay">
+            <div class="hero-content">
+              <span class="hero-badge">AI Exclusive</span>
+              <h1 class="hero-title">Turn Any Inspiration Look Into Real Nykaa Products</h1>
+              <p class="hero-desc">Upload a photo of your favourite makeup look. Our AI pinpoints exact lipsticks, eye makeup and shades in seconds.</p>
+              <button class="hero-cta-btn" onclick="openCopilotModal(1)">
+                <span>Analyze Your Look Now</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="hero-nav-arrow prev" onclick="prevHeroSlide()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="hero-nav-arrow next" onclick="nextHeroSlide()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- Seamless Native Copilot Feature Banner -->
+    <section class="copilot-feature-banner">
+      <div class="copilot-banner-text">
+        <span class="copilot-pill">✦ Nykaa Copilot AI Feature</span>
+        <h2 class="copilot-banner-title">From Look to Products</h2>
+        <p class="copilot-banner-desc">
+          Love a makeup look on Instagram, Pinterest or a magazine? Upload it or select a curated preset. Our vision AI maps the exact shades, finds authentic Nykaa products, and lets you try on the lipstick live on your webcam!
+        </p>
+      </div>
+      <div class="copilot-banner-actions">
+        <button class="btn-copilot-launch" onclick="openCopilotModal(1)">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>Upload Makeup Photo</span>
+        </button>
+        <button class="btn-copilot-preset" onclick="openCopilotModal(1)">
+          <span>Explore 4 Preset Looks</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Section Heading: Trending Bestsellers -->
+    <div class="section-header-row">
+      <div>
+        <h2 class="section-heading">Bestsellers in Makeup & Beauty</h2>
+        <p class="section-subtitle">Top-rated lipsticks, blush, eye makeup and luxury essentials</p>
+      </div>
+      <a href="#" class="section-view-all">View All (120+) →</a>
+    </div>
+
+    <!-- Product Grid: Real Nykaa desktop cards -->
+    <div class="product-grid" id="homepage-products-grid">
+      <!-- Populated dynamically by app.js from NYKAA_CATALOG -->
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       4. FOOTER (Nykaa Standard Visuals)
+       ========================================================================= -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-logo-desc">
+          <img src="nykaa-logo.svg" alt="Nykaa" style="height: 30px; filter: brightness(0) invert(1);">
+          <p>India's leading destination for cosmetics, luxury beauty and skincare. 100% authentic products sourced directly from brands.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">NYKAA</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Who are we?</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Authenticity</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">HELP</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Frequently Asked Questions</a></li>
+            <li><a href="#">Store Locator</a></li>
+            <li><a href="#">Cancellation & Return</a></li>
+            <li><a href="#">Shipping & Delivery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">TOP CATEGORIES</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Lipsticks</a></li>
+            <li><a href="#">Kajal & Eyeliner</a></li>
+            <li><a href="#">Foundations</a></li>
+            <li><a href="#">Blush & Highlighters</a></li>
+            <li><a href="#">Eyeshadow Palettes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">QUICK LINKS</h4>
+          <ul class="footer-col-links">
+            <li><a href="#">Offers & Coupons</a></li>
+            <li><a href="#">Nykaa Luxe</a></li>
+            <li><a href="#">Nykaa Pro</a></li>
+            <li><a href="#">Nykaa Network</a></li>
+            <li><a href="#">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>Terms & Conditions • Shipping Policy • Privacy Policy • © 2026 Nykaa E-Retail Limited. All Rights Reserved.</div>
+        <div>Desktop Prototype 1440px | AI "From Look to Products" Copilot</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       5. SHOPPING CART SLIDEOUT DRAWER
+       ========================================================================= -->
+  <div class="cart-drawer-overlay" id="cart-overlay" onclick="closeCartDrawer()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <div class="cart-header-title">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <span>Shopping Bag</span>
+      </div>
+      <button class="cart-close-btn" onclick="closeCartDrawer()" title="Close Bag">✕</button>
+    </div>
+
+    <div class="cart-items-container" id="cart-items-list">
+      <!-- Populated dynamically by app.js -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-shipping-note">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span>Free Shipping applied to this order!</span>
+      </div>
+      <div class="cart-subtotal-row">
+        <span>Grand Total:</span>
+        <span class="cart-total-amount" id="cart-subtotal-val">₹0</span>
+      </div>
+      <button class="btn-checkout" onclick="handleCartCheckout()">
+        <span>Proceed to Checkout</span>
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       6. AI COPILOT MODAL: "FROM LOOK TO PRODUCTS" (6-Step Complete Journey)
+       ========================================================================= -->
+  <div class="copilot-modal-backdrop" id="copilot-modal-backdrop">
+    <div class="copilot-modal-window">
+      
+      <!-- Modal Header -->
+      <div class="copilot-header">
+        <div class="copilot-header-brand">
+          <img src="nykaa-logo.svg" alt="Nykaa" style="height: 24px; filter: brightness(0) invert(1);">
+          <span class="copilot-logo-badge">✦ COPILOT</span>
+          <div>
+            <div class="copilot-header-title">From Look to Products</div>
+            <div class="copilot-header-sub">Inspiration image to matched Nykaa products with live AR Virtual Try-On</div>
+          </div>
+        </div>
+        <button class="copilot-close-btn" onclick="closeCopilotModal()" title="Close Copilot">✕</button>
+      </div>
+
+      <!-- 6-Step Visual Stepper -->
+      <div class="copilot-stepper">
+        <div class="step-crumb active" data-step="1" onclick="goToCopilotStep(1)">
+          <span class="step-number">1</span>
+          <span>Inspiration Photo</span>
+        </div>
+        <div class="step-divider"></div>
+
+        <div class="step-crumb" data-step="2" onclick="goToCopilotStep(2)">
+          <span class="step-number">2</span>
+          <span>Adjust & Zoom</span>
+        </div>
+        <div class="step-divider"></div>
+
+        <div class="step-crumb" data-step="3" onclick="goToCopilotStep(3)">
+          <span class="step-number">3</span>
+          <span>AI Shade Scan</span>
+        </div>
+        <div class="step-divider"></div>
+
+        <div class="step-crumb" data-step="4" onclick="goToCopilotStep(4)">
+          <span class="step-number">4</span>
+          <span>Recommended Products</span>
+        </div>
+        <div class="step-divider"></div>
+
+        <div class="step-crumb" data-step="5" onclick="goToCopilotStep(5)">
+          <span class="step-number">5</span>
+          <span>Live AR Try-On</span>
+        </div>
+        <div class="step-divider"></div>
+
+        <div class="step-crumb" data-step="6" onclick="goToCopilotStep(6)">
+          <span class="step-number">6</span>
+          <span>Review & Cart</span>
+        </div>
+      </div>
+
+      <!-- Copilot Body / Tab Views -->
+      <div class="copilot-body">
+
+        <!-- -------------------------------------------------------------
+             STEP 1: UPLOAD & PRESET SELECTION
+             ------------------------------------------------------------- -->
+        <div class="copilot-view active" id="copilot-view-1">
+          <div class="view-upload-container">
+            <div class="upload-drop-zone-col">
+              <div class="upload-drop-box" id="upload-drop-box" 
+                   ondragover="event.preventDefault(); this.classList.add('dragover');" 
+                   ondragleave="this.classList.remove('dragover');" 
+                   ondrop="event.preventDefault(); this.classList.remove('dragover'); processUploadedFile(event.dataTransfer.files[0]);">
+                
+                <div class="upload-icon-circle">
+                  <svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <h3 class="upload-title">Upload Makeup Inspiration</h3>
+                <p class="upload-sub">Drag and drop any makeup look photo from your files, or take a quick snapshot with your webcam.</p>
+
+                <div class="upload-btn-group">
+                  <label class="btn-upload-file" style="cursor: pointer;">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    <span>Browse Gallery</span>
+                    <input type="file" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">
+                  </label>
+
+                  <button class="btn-camera-capture" onclick="triggerCameraSnapshotModal()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span>Take Photo</span>
+                  </button>
+                </div>
+
+                <div style="font-size: 11px; color: var(--nykaa-text-light); margin-top: 14px;">
+                  Supports JPG, PNG, WEBP (Clear lighting recommended)
+                </div>
+              </div>
+            </div>
+
+            <!-- Preset Curated Looks Column -->
+            <div class="upload-presets-col">
+              <div class="presets-title-row">
+                <div class="presets-heading">
+                  <span>★</span>
+                  <span>Or Pick From Trending Looks</span>
+                </div>
+                <button class="btn-analyze-step" style="padding: 6px 14px; font-size: 12px; border-radius: 14px;" onclick="goToCopilotStep(2)">
+                  Continue With Selected →
+                </button>
+              </div>
+
+              <div class="preset-grid" id="copilot-preset-grid">
+                <!-- Injected by app.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------------------
+             STEP 2: ADJUST, ZOOM & REPOSITION
+             ------------------------------------------------------------- -->
+        <div class="copilot-view" id="copilot-view-2">
+          <div class="view-adjust-container">
+            <div class="adjust-canvas-workspace">
+              <div class="canvas-crop-frame" id="crop-frame-box">
+                <img src="assets/images/look-berry.jpg" alt="Inspiration" class="canvas-target-img" id="crop-target-img">
+                <div class="crop-grid-overlay"></div>
+                <div class="crop-center-focus">Target Lips & Face</div>
+              </div>
+            </div>
+
+            <div class="adjust-controls-col">
+              <div>
+                <h3 class="adjust-header-title">Frame & Position Your Look</h3>
+                <p class="adjust-header-sub">Drag the photo to center the face, zoom in for closer detail, or rotate to level the angle.</p>
+
+                <div class="control-slider-group">
+                  <div class="control-slider-label">
+                    <span>Zoom Factor</span>
+                    <span id="crop-zoom-val" style="color:var(--nykaa-pink); font-weight:700;">100%</span>
+                  </div>
+                  <input type="range" class="adjust-slider" id="crop-zoom-slider" min="0.8" max="2.5" step="0.05" value="1.0">
+                </div>
+
+                <div class="tool-btn-row">
+                  <button class="btn-adjust-tool" onclick="rotateCropImage(-90)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+                    <span>Rotate Left</span>
+                  </button>
+                  <button class="btn-adjust-tool" onclick="rotateCropImage(90)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"/></svg>
+                    <span>Rotate Right</span>
+                  </button>
+                  <button class="btn-adjust-tool" onclick="resetCropTransform()">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <span>Reset</span>
+                  </button>
+                </div>
+
+                <div style="background:#fff; border:1px solid var(--nykaa-border); border-radius:10px; padding:12px; font-size:12px; color:var(--nykaa-text-muted);">
+                  💡 <strong>Pro Tip:</strong> Keeping lips inside the center guide will maximize the accuracy of shade identification and undertone matching.
+                </div>
+              </div>
+
+              <div class="adjust-actions-bottom">
+                <button class="btn-back-step" onclick="goToCopilotStep(1)">← Back</button>
+                <button class="btn-analyze-step" onclick="goToCopilotStep(3)">
+                  <span>Analyze Makeup Elements</span>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------------------
+             STEP 3: MAKEUP ELEMENT & SHADE ANALYSIS
+             ------------------------------------------------------------- -->
+        <div class="copilot-view" id="copilot-view-3">
+          <div class="view-analysis-container">
+            <div class="analysis-visual-col">
+              <img src="assets/images/look-berry.jpg" alt="Scan Image" class="analysis-visual-img" id="analysis-scan-img">
+              <div class="scan-laser-line" id="scan-laser-line"></div>
+              <div id="analysis-hotspots">
+                <!-- Interactive feature hotspots injected by app.js -->
+              </div>
+            </div>
+
+            <div class="analysis-results-col">
+              <div>
+                <div class="analysis-header-row">
+                  <span class="analysis-badge">✦ Nykaa Vision AI Breakdown</span>
+                  <h3 class="analysis-title">Identified Makeup Elements & Shades</h3>
+                  <p class="analysis-subtitle">We extracted dominant cosmetic pigments, undertones and finishes.</p>
+                </div>
+
+                <div class="features-breakdown-list" id="features-breakdown-list">
+                  <!-- Injected by app.js -->
+                </div>
+              </div>
+
+              <div class="adjust-actions-bottom">
+                <button class="btn-back-step" onclick="goToCopilotStep(2)">← Re-adjust</button>
+                <button class="btn-analyze-step" onclick="goToCopilotStep(4)">
+                  <span>View Matched Nykaa Products</span>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------------------
+             STEP 4: CURATED NYKAA RECOMMENDATIONS & SHADES
+             ------------------------------------------------------------- -->
+        <div class="copilot-view" id="copilot-view-4">
+          <div class="view-recommendations-container">
+            <div class="recom-top-bar">
+              <div class="recom-header-info">
+                <div id="recom-detected-shade-pill" class="recom-shade-match-pill">
+                  <!-- Injected by app.js -->
+                </div>
+                <div class="recom-filter-tabs">
+                  <button class="recom-tab-btn active" onclick="filterRecommendations('all', this)">All Matched</button>
+                  <button class="recom-tab-btn" onclick="filterRecommendations('Lipstick', this)">Lipsticks</button>
+                  <button class="recom-tab-btn" onclick="filterRecommendations('Eyes', this)">Eyes & Mascara</button>
+                  <button class="recom-tab-btn" onclick="filterRecommendations('Blush', this)">Blush & Face</button>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:10px;">
+                <button class="btn-back-step" style="padding:8px 16px; font-size:12.5px;" onclick="goToCopilotStep(3)">← Analysis</button>
+                <button class="btn-analyze-step" style="padding:8px 20px; font-size:13px;" onclick="goToCopilotStep(5)">
+                  <span>Try On Lipstick Live (AR) →</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="recom-products-scroll" id="recom-products-grid">
+              <!-- Injected by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------------------
+             STEP 5: REAL WEBCAM VIRTUAL LIPSTICK TRY-ON
+             ------------------------------------------------------------- -->
+        <div class="copilot-view" id="copilot-view-5">
+          <div class="view-tryon-container">
+            <div class="tryon-camera-col">
+              
+              <!-- Real Video Stream & Overlaid Canvas for Face Mesh Lip Rendering -->
+              <video id="tryon-video-feed" class="camera-video-stream" playsinline muted></video>
+              <canvas id="tryon-canvas-overlay" class="camera-overlay-canvas"></canvas>
+
+              <!-- Live HUD status -->
+              <div class="tryon-hud-header">
+                <div class="tryon-status-pill">
+                  <span class="status-beacon"></span>
+                  <span id="tracking-status-text">Webcam Active • Detecting Lip Contours</span>
+                </div>
+                <button class="btn-snapshot-look" style="width:auto; margin-bottom:0; padding:6px 14px; background:rgba(0,0,0,0.6); color:#fff; border-color:rgba(255,255,255,0.4);" onclick="captureTryonSnapshot()">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>Snap Look</span>
+                </button>
+              </div>
+
+              <!-- Permission / Fallback Box if camera is not enabled -->
+              <div class="tryon-camera-fallback" id="tryon-fallback-box">
+                <div class="camera-perm-icon">
+                  <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="camera-perm-title">Camera Access Required</h3>
+                <p class="camera-perm-desc">Please grant webcam permission in your browser to experience live AI lip contour detection and shade rendering.</p>
+                <button class="btn-req-camera" onclick="startLiveWebcam()">Enable Camera</button>
+              </div>
+            </div>
+
+            <!-- AR Controls Sidebar -->
+            <div class="tryon-sidebar-col">
+              <div>
+                <h3 class="tryon-sidebar-heading">Live Lip Shade Studio</h3>
+                <p class="tryon-sidebar-sub">Try the detected shade or switch between matched Nykaa alternatives in real-time.</p>
+
+                <!-- Currently Active Shade Card -->
+                <div class="tryon-active-shade-card">
+                  <div class="active-shade-swatch-large" id="tryon-active-swatch"></div>
+                  <div class="active-shade-details">
+                    <div class="active-shade-brand" id="tryon-active-brand">Kay Beauty</div>
+                    <div class="active-shade-name" id="tryon-active-name">Deep Berry Plum</div>
+                    <div class="active-shade-price" id="tryon-active-price">₹799</div>
+                  </div>
+                </div>
+
+                <!-- Shade Swatches Palette -->
+                <div class="tryon-palette-section">
+                  <div class="palette-label">Switch Nykaa Lip Shades:</div>
+                  <div class="palette-swatches-grid" id="tryon-swatches-grid">
+                    <!-- Injected by app.js -->
+                  </div>
+                </div>
+
+                <!-- Customizers: Opacity & Finish -->
+                <div class="tryon-sliders-block">
+                  <div class="intensity-row">
+                    <span>Color Intensity / Opacity</span>
+                    <span id="tryon-opacity-val" style="color:var(--nykaa-pink); font-weight:700;">65%</span>
+                  </div>
+                  <input type="range" class="adjust-slider" id="tryon-opacity-slider" min="0.2" max="1.0" step="0.05" value="0.65">
+
+                  <div style="margin-top:14px;">
+                    <span class="intensity-row">Lipstick Finish:</span>
+                    <div class="finish-toggle-group">
+                      <button class="btn-finish-opt active" onclick="setTryonFinish('matte', this)">Matte</button>
+                      <button class="btn-finish-opt" onclick="setTryonFinish('gloss', this)">Vinyl Gloss</button>
+                      <button class="btn-finish-opt" onclick="setTryonFinish('velvet', this)">Velvet</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Actions -->
+              <div>
+                <button class="btn-snapshot-look" onclick="captureTryonSnapshot()">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>Take Snapshot with Shade</span>
+                </button>
+
+                <div class="adjust-actions-bottom">
+                  <button class="btn-back-step" onclick="goToCopilotStep(4)">← Products</button>
+                  <button class="btn-analyze-step" onclick="goToCopilotStep(6)">
+                    <span>Review Look Bundle →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------------------
+             STEP 6: REVIEW LOOK & BUNDLE TO BAG
+             ------------------------------------------------------------- -->
+        <div class="copilot-view" id="copilot-view-6">
+          <div class="view-review-container">
+            <div class="review-summary-col">
+              <div class="review-image-card">
+                <img src="assets/images/look-berry.jpg" alt="Look Summary" class="review-img" id="review-summary-img">
+                <div class="review-look-badge" id="review-look-name-badge">
+                  <span>★</span> Editorial Berry Glam
+                </div>
+              </div>
+
+              <div class="review-shade-tags-box">
+                <div class="review-tags-heading">Detected Profile:</div>
+                <div id="review-tags-content">
+                  <!-- Injected by app.js -->
+                </div>
+              </div>
+
+              <div style="font-size:12px; color:var(--nykaa-text-muted); line-height:1.5;">
+                ✨ You can check or uncheck individual items from your curated look before sending the complete bundle to your Nykaa shopping bag.
+              </div>
+            </div>
+
+            <div class="review-bundle-col">
+              <div>
+                <div class="bundle-header-row">
+                  <h3 class="bundle-title">Your Curated Look Bundle</h3>
+                  <span class="bundle-count-pill" id="bundle-selected-count-badge">3 Items Selected</span>
+                </div>
+
+                <div class="bundle-items-list" id="bundle-items-list">
+                  <!-- Injected by app.js -->
+                </div>
+              </div>
+
+              <div class="bundle-total-banner">
+                <div class="bundle-pricing-row">
+                  <span class="bundle-total-label">Bundle Subtotal:</span>
+                  <span class="bundle-total-val" id="bundle-total-price-val">₹0</span>
+                </div>
+
+                <div style="display:flex; gap:12px;">
+                  <button class="btn-back-step" style="flex:0.35;" onclick="goToCopilotStep(5)">← AR Try-On</button>
+                  <button class="btn-add-all-bundle" onclick="addEntireLookBundleToCart()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span>Add Complete Look to Bag</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="nykaa-toast" id="nykaa-toast">
+    <span class="toast-dot"></span>
+    <span id="nykaa-toast-msg">Added to bag</span>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="catalog.js"></script>
+  <script src="app.js"></script>
+  <!-- Background non-blocking AR libs -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+</body>
+</html>
