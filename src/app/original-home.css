@@ -1,0 +1,553 @@
+.top-announcement {
+  background: linear-gradient(90deg, #ff5e9c 0%, #fc2779 50%, #f4146a 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 7px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.top-announcement span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-announcement a {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.top-utility-strip {
+  background-color: #f7f7f8;
+  border-bottom: 1px solid var(--nykaa-border);
+  font-size: 12px;
+  color: var(--nykaa-dark);
+}
+.utility-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.utility-left, .utility-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.utility-link {
+  color: var(--nykaa-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+.utility-link:hover {
+  color: var(--nykaa-pink);
+}
+
+/* ==========================================================================
+   MAIN HEADER (STICKY)
+   ========================================================================== */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--nykaa-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.brand-logo-svg {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.nav-categories-strip {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-shrink: 0;
+}
+.nav-cat-item {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nykaa-text);
+  padding: 6px 0;
+  position: relative;
+  transition: var(--transition);
+}
+.nav-cat-item:hover {
+  color: var(--nykaa-pink);
+}
+.nav-cat-item.active {
+  color: var(--nykaa-pink);
+}
+.nav-cat-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--nykaa-pink);
+  border-radius: 2px;
+}
+
+/* SEARCH BAR */
+.header-search-wrap {
+  flex: 1;
+  max-width: 440px;
+  position: relative;
+}
+.header-search-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+.header-search-box:focus-within {
+  background: #ffffff;
+  border-color: var(--nykaa-pink);
+  box-shadow: 0 0 0 3px rgba(252, 39, 121, 0.12);
+}
+.header-search-box svg {
+  color: var(--nykaa-text-muted);
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.header-search-input {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 13.5px;
+  color: var(--nykaa-text);
+}
+.header-search-input::placeholder {
+  color: var(--nykaa-text-muted);
+}
+
+/* COPILOT TRIGGER CTA IN HEADER */
+.copilot-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fc2779 0%, #7928ca 100%);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(252, 39, 121, 0.35);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  animation: pulse-glow 3s infinite;
+}
+.copilot-header-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(252, 39, 121, 0.45);
+}
+.copilot-badge-sparkle {
+  display: inline-flex;
+  animation: spin-slow 8s linear infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(252, 39, 121, 0.35); }
+  50% { box-shadow: 0 4px 20px rgba(121, 40, 202, 0.5); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* HEADER USER ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.header-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--nykaa-dark);
+  position: relative;
+  transition: var(--transition);
+}
+.header-action-btn:hover {
+  color: var(--nykaa-pink);
+}
+.header-action-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.cart-count-badge {
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  background: var(--nykaa-pink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  height: 17px;
+  min-width: 17px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+}
+
+/* SUB NAVIGATION / SECONDARY MEGA BAR */
+.secondary-nav {
+  background: #fff;
+  border-top: 1px solid var(--nykaa-border);
+  border-bottom: 1px solid var(--nykaa-border);
+}
+.sec-nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  overflow-x: auto;
+}
+.sec-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--nykaa-dark);
+  padding: 10px 0;
+  white-space: nowrap;
+  position: relative;
+  transition: var(--transition);
+}
+.sec-nav-link:hover {
+  color: var(--nykaa-pink);
+}
+.sec-nav-link.highlight {
+  color: var(--nykaa-pink);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   HOMEPAGE CONTENT WRAPPER
+   ========================================================================== */
+.page-container {
+  max-width: 1400px;
+  margin: 20px auto 60px;
+  padding: 0 24px;
+}
+
+/* HERO BANNER CAROUSEL */
+.hero-banner-section {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  background: #111;
+  height: 380px;
+}
+.hero-slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+}
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(11, 18, 25, 0.85) 0%, rgba(11, 18, 25, 0.4) 50%, rgba(11, 18, 25, 0) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+}
+.hero-content {
+  max-width: 580px;
+  color: #fff;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(252, 39, 121, 0.9);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.hero-desc {
+  font-size: 15px;
+  color: #f0f0f0;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--nykaa-pink);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 26px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(252, 39, 121, 0.4);
+  transition: var(--transition);
+}
+.hero-cta-btn:hover {
+  background: var(--nykaa-pink-hover);
+  transform: translateY(-2px);
+}
+.hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--nykaa-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+  z-index: 10;
+}
+.hero-nav-arrow:hover {
+  background: #fff;
+  color: var(--nykaa-pink);
+}
+.hero-nav-arrow.prev { left: 20px; }
+.hero-nav-arrow.next { right: 20px; }
+
+/* PROMOTIONAL FEATURE STRIP: FROM LOOK TO PRODUCTS FEATURE PROMO */
+.copilot-feature-banner {
+  background: linear-gradient(135deg, #2b1138 0%, #170926 50%, #400d27 100%);
+  border-radius: 16px;
+  padding: 24px 32px;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(121, 40, 202, 0.15);
+  border: 1px solid rgba(252, 39, 121, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+.copilot-feature-banner::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(252, 39, 121, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.copilot-banner-text {
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+.copilot-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(252, 39, 121, 0.2);
+  border: 1px solid rgba(252, 39, 121, 0.5);
+  color: #ff85b3;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.copilot-banner-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, #ffffff 0%, #ffd0e3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.copilot-banner-desc {
+  font-size: 13.5px;
+  color: #d8d3e2;
+  line-height: 1.45;
+}
+.copilot-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 2;
+}
+.btn-copilot-launch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--nykaa-pink);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 26px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(252, 39, 121, 0.45);
+  transition: var(--transition);
+}
+.btn-copilot-launch:hover {
+  background: #ff3c8a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(252, 39, 121, 0.6);
+}
+.btn-copilot-preset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 26px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.btn-copilot-preset:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Original desktop storefront proportions, with mobile adaptations. */
+:root {
+  --nykaa-pink: #fc2779;
+  --nykaa-pink-hover: #e01d67;
+  --nykaa-dark: #3f414d;
+  --nykaa-text: #0b1219;
+  --nykaa-text-muted: #6f7284;
+  --nykaa-border: #e3e6eb;
+  --nykaa-white: #fff;
+  --transition: all .22s cubic-bezier(.4, 0, .2, 1);
+}
+body { background: #f3f3f3; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+.main-header { position: relative; }
+.utility-container,.header-inner,.sec-nav-inner { max-width: 1478px; }
+.header-inner { gap: 28px; }
+.header-search-wrap { min-width: 210px; }
+.copilot-header-btn { white-space: nowrap; flex-shrink: 0; }
+.brand-logo-svg { height: 34px; max-width: none; }
+.hero-slide-recreated { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.sec-nav-link { padding: 13px 0; }
+.original-home-top { max-width: 1478px; margin: 21px auto 0; padding: 0 24px; }
+.original-home-top .hero-banner-section { height: 397px; margin-bottom: 30px; }
+.original-home-top .hero-overlay { padding: 0 62px; }
+.original-home-top .hero-content { max-width: 600px; }
+.original-home-top .hero-title { letter-spacing: -.025em; }
+.original-home-top .hero-nav-arrow { font-size: 32px; line-height: 1; }
+.original-home-top .copilot-feature-banner { min-height: 153px; }
+.original-home-top .copilot-banner-desc { margin: 0; }
+.original-home-top .copilot-banner-title { letter-spacing: -.02em; }
+.original-home-top .copilot-banner-actions { flex-shrink: 0; }
+.original-home-top .hero-cta-btn,.original-home-top .hero-nav-arrow,.original-home-top .btn-copilot-launch { border: 0; }
+.shop-section,.how-section { background: transparent; }
+.shop-section.container { max-width: 1478px; padding: 0 24px 60px; }
+.shop-section .section-head { border-bottom: 2px solid var(--nykaa-border); padding-bottom: 8px; margin-bottom: 18px; }
+.shop-section .section-head h2 { font-size: 22px; letter-spacing: -.3px; margin: 0 0 3px; }
+.shop-section .section-head p { font-size: 13px; }
+.shop-section .product-count { background: transparent; color: var(--nykaa-pink); font-size: 13px; }
+.looks-section { background: #fff; }
+@media (max-width: 1370px) {
+  .header-inner { gap: 20px; }
+  .nav-categories-strip { gap: 15px; }
+  .header-search-wrap { min-width: 160px; }
+  .copilot-header-btn { padding: 8px 11px; }
+  .sec-nav-inner { gap: 22px; }
+}
+@media (max-width: 1100px) {
+  .utility-container { padding: 6px 18px; }
+  .header-inner { gap: 17px; padding: 12px 18px; }
+  .nav-categories-strip { display: none; }
+  .header-search-wrap { max-width: none; }
+  .original-home-top .copilot-feature-banner { flex-wrap: wrap; gap: 20px; }
+}
+@media (max-width: 760px) {
+  .top-announcement { font-size: 10px; line-height: 1.35; }
+  .top-utility-strip { display: none; }
+  .header-inner { gap: 12px; padding: 11px 15px; }
+  .brand-logo-svg { height: 27px; }
+  .header-search-wrap { display: none; }
+  .copilot-header-btn { margin-left: auto; font-size: 10px; padding: 9px 10px; }
+  .header-actions { gap: 10px; }
+  .header-action-btn { font-size: 10px; }
+  .header-action-btn svg { width: 19px; height: 19px; }
+  .header-actions>span { display: none; }
+  .sec-nav-inner { gap: 23px; padding: 0 16px; }
+  .original-home-top { margin-top: 15px; padding: 0 15px; }
+  .original-home-top .hero-banner-section { height: 390px; margin-bottom: 15px; }
+  .original-home-top .hero-overlay { padding: 0 45px; background: linear-gradient(90deg,rgba(11,18,25,.88),rgba(11,18,25,.3)); }
+  .original-home-top .hero-title { font-size: 29px; }
+  .original-home-top .hero-desc { font-size: 13px; }
+  .original-home-top .hero-nav-arrow { width: 34px; height: 34px; font-size: 25px; }
+  .original-home-top .hero-nav-arrow.prev { left: 8px; }
+  .original-home-top .hero-nav-arrow.next { right: 8px; }
+  .original-home-top .copilot-feature-banner { padding: 22px; }
+  .original-home-top .copilot-banner-actions { flex-wrap: wrap; }
+  .shop-section.container { padding-left: 15px; padding-right: 15px; }
+}
