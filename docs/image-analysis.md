@@ -33,6 +33,6 @@ Confidence is assigned by code, not calculated from a calibrated probability. Li
 
 ## Network and runtime
 
-The image is sent from the browser to this app's local Node.js analysis route. The server downloads public model artifacts from Hugging Face on first use and then caches them. The uploaded image is processed locally; the app does not send it to a Hugging Face hosted inference endpoint. No Hugging Face key is required for the current public model. See [Data, privacy, and licenses](data-privacy-and-licenses.md).
+The image is sent from the browser to this app's Node.js analysis route. The server loads model artifacts packaged during the build, with remote model loading disabled. The uploaded image is processed by this app's server; the app does not send it to a Hugging Face hosted inference endpoint. No Hugging Face key is required for the current public model. See [Data, privacy, and licenses](data-privacy-and-licenses.md).
 
 The exact implementation is in [`src/lib/analysis.ts`](../src/lib/analysis.ts). See the [API reference](api.md) for request and response shapes.

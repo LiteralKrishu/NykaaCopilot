@@ -3,7 +3,7 @@
 ## Requirements
 
 - Node.js 20.9 or newer and npm.
-- An internet connection for `npm install` and the first face-analysis model download.
+- An internet connection for `npm install` and the first model preparation during `npm run dev` or `npm run build`.
 - A modern browser with Canvas support. Live camera mode also needs a camera and browser permission.
 
 From the repository root:
@@ -22,9 +22,9 @@ npm run build
 npm run start
 ```
 
-## First analysis and model downloads
+## Model preparation and first analysis
 
-The first request to `POST /api/analyze` loads the public `jonathandinu/face-parsing` model through `@huggingface/transformers` with `dtype: "q8"`. Transformers.js downloads model artifacts from the Hugging Face Hub and caches them on the server's filesystem. This first run can take longer and requires network access; later analyses reuse the cache. The app does **not** call the hosted Hugging Face Inference API for photos and does not require a Hugging Face key for this public model.
+`npm run dev` and `npm run build` first run `scripts/prepare-model.mjs`. It downloads a pinned version of `jonathandinu/face-parsing`, verifies the files by SHA-256, and stores them in the ignored `.models/` directory. The production build packages these files with `POST /api/analyze`. At request time, `@huggingface/transformers` loads the local files with `dtype: "q8"`; remote model loading is disabled. The first request can take longer while the bundled model initializes. The app does **not** call the hosted Hugging Face Inference API for photos and does not require a Hugging Face key for this public model.
 
 MediaPipe's `face_landmarker.task` and vision WASM assets are already included under `public/models/` and `public/mediapipe/wasm/`. The browser loads them from this app when try-on starts. Their runtime is independent of the server-side Hugging Face model.
 

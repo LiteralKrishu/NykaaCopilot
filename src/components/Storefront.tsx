@@ -10,6 +10,41 @@ type Props = { products: Product[]; presets: Preset[] };
 type Step = "source" | "analysis" | "tryon" | "review";
 const zoneTitles: Record<MakeupZone, string> = { lips: "Lips", eyeshadow: "Eyeshadow", eyeliner: "Eyeliner", mascara: "Mascara", brows: "Brows", blush: "Blush", contour: "Contour", highlighter: "Highlighter", foundation: "Base" };
 const rupees = (value: number) => `₹${value.toLocaleString("en-IN")}`;
+const MAX_FUNCTION_UPLOAD_BYTES = 4 * 1024 * 1024;
+
+async function prepareImageUpload(file: File): Promise<File> {
+  if (file.size <= MAX_FUNCTION_UPLOAD_BYTES) return file;
+  const image = await createImageBitmap(file);
+  try {
+    const scale = Math.min(1, 2048 / Math.max(image.width, image.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(image.width * scale);
+    canvas.height = Math.round(image.height * scale);
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("This browser could not resize the image.");
+    context.fillStyle = "white";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    for (const quality of [0.85, 0.7, 0.55]) {
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", quality));
+      if (blob && blob.size <= MAX_FUNCTION_UPLOAD_BYTES) {
+        return new File([blob], `${file.name.replace(/\.[^.]+$/, "")}.jpg`, { type: "image/jpeg" });
+      }
+    }
+    throw new Error("This image is too large to analyze. Try a smaller photo.");
+  } finally {
+    image.close();
+  }
+}
+
+async function readApiJson<T>(response: Response, fallback: string): Promise<T> {
+  if (!response.headers.get("content-type")?.includes("application/json")) {
+    throw new Error(`${fallback} (server returned HTTP ${response.status}).`);
+  }
+  const data = await response.json() as T & { error?: string };
+  if (!response.ok) throw new Error(data.error ?? `${fallback} (HTTP ${response.status}).`);
+  return data;
+}
 
 function ProductCard({ product, onAdd }: { product: Product; onAdd: (product: Product, shadeId: string) => void }) {
   const [shadeId, setShadeId] = useState(product.shades[0]?.id ?? "");
@@ -53,8 +88,7 @@ export default function Storefront({ products, presets }: Props) {
     setCartBusy(true);
     try {
       const response = await fetch("/api/cart", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lines }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "Could not update bag.");
+      const data = await readApiJson<{ lines: CartLine[] }>(response, "Could not update bag");
       setCart(data.lines);
     } catch (failure) { setError(failure instanceof Error ? failure.message : "Could not update bag."); }
     finally { setCartBusy(false); }
@@ -78,11 +112,11 @@ export default function Storefront({ products, presets }: Props) {
     setError(""); setBusy(true); setAnalysis(null); setSelected({}); setSnapshotUrl(null);
     if (sourceUrl?.startsWith("blob:")) URL.revokeObjectURL(sourceUrl);
     setSourceUrl(URL.createObjectURL(file)); setSourceName(name);
-    const form = new FormData(); form.set("image", file);
     try {
+      const upload = await prepareImageUpload(file);
+      const form = new FormData(); form.set("image", upload);
       const response = await fetch("/api/analyze", { method: "POST", body: form });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error ?? "Analysis failed.");
+      const result = await readApiJson<LookAnalysis>(response, "Analysis failed");
       setAnalysis(result as LookAnalysis);
       setSelected(Object.fromEntries(MAKEUP_ZONES.flatMap((zone) => result.recommendations[zone]?.[0] ? [[zone, result.recommendations[zone][0]]] : [])));
       setStep("analysis");

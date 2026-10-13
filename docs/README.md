@@ -24,6 +24,6 @@ The documentation describes the **current implementation in this repository**. T
 2. An inspiration photo is sent to `POST /api/analyze`. A public face-parsing model runs **on the local Node.js server** and marks facial parts. Code samples visible colors from those parts; it does not identify specific cosmetics.
 3. Each measured color is compared with catalog swatches in the same makeup category using CIEDE2000. The UI shows up to three sufficiently close shades per category.
 4. A separate selfie or live camera stream stays in the browser for MediaPipe face tracking. Canvas code draws the chosen colors on the tracked face. A snapshot can be reviewed.
-5. The bag stores product IDs, shade IDs, and quantities in a local JSON file tied to a demo session cookie.
+5. The bag stores product IDs, shade IDs, and quantities in an HTTP-only browser cookie.
 
 Start with [Getting started](getting-started.md), then follow the [User guide](user-guide.md).

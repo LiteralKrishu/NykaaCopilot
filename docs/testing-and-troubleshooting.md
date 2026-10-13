@@ -27,14 +27,15 @@ The documentation check verifies local Markdown links in the root README and `do
 
 | Symptom | Likely cause and action |
 | --- | --- |
-| First analysis takes a long time or returns a model-loading error | The server is downloading the public face parser. Check its terminal output and internet access, then retry. Later requests reuse the Transformers.js cache. |
+| Build fails while preparing the model | The build downloads the pinned model files from Hugging Face. Check build-time network access and the model integrity error, then retry the build. |
+| First analysis takes a long time or returns a model-loading error | The server is initializing the bundled local face parser. Check the function logs and confirm the build packaged the model files and ONNX runtime. |
 | Upload rejected before analysis | Use JPEG, PNG, or WebP below 8 MB. Decoded width and height must each be between 128 and 4096 pixels. |
 | Analysis says no clear face | Try a single, front-facing, well-lit portrait with visible eyes and lips. The parser requires usable skin, eye, and lip samples. |
 | Product area shows no match | The demo catalog may not contain that product kind, or all swatches exceed its color-distance cutoff. Brows, contour, and highlighter have no catalog products. |
 | Selfie has no makeup | Wait for face tracking; use a clear front-facing selfie. No overlays are drawn without detected landmarks. |
 | Camera fails to start | Grant browser camera access, check the camera is available, and use `localhost` or HTTPS. Browser or operating-system permission failures appear in the try-on status line. |
 | Try-on feels slow | The browser runs MediaPipe and Canvas locally. Try a smaller selfie, close other heavy tabs, or use a device with a faster browser/GPU. The tracker falls back to CPU if GPU setup fails. |
-| Bag is empty after changing browser or deleting site data | The bag is associated with an HTTP-only session cookie; its JSON data is stored only in this local app instance. |
+| Bag is empty after changing browser or deleting site data | The demo bag is stored in an HTTP-only cookie in the original browser. |
 
 ## Current validation limits
 

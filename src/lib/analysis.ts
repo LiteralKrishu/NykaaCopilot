@@ -1,9 +1,13 @@
-import { RawImage, pipeline, type ImageSegmentationPipeline } from "@huggingface/transformers";
+import { env, RawImage, pipeline, type ImageSegmentationPipeline } from "@huggingface/transformers";
+import path from "node:path";
 import { rgbToHex } from "./color";
 import { recommendationsFor } from "./matching";
 import { type LookAnalysis, type MakeupZone, type RegionAnalysis } from "./types";
 
 const MODEL_ID = "jonathandinu/face-parsing";
+env.localModelPath = path.join(process.cwd(), ".models");
+env.allowRemoteModels = false;
+env.useFSCache = false;
 type Segmentation = { label: string; mask: RawImage; score?: number };
 let segmenterPromise: Promise<ImageSegmentationPipeline> | null = null;
 

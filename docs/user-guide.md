@@ -8,7 +8,7 @@ The header's **From Look to Products** button opens the four-step look workflow.
 
 ## 1. Choose an inspiration look
 
-Upload a front-facing JPEG, PNG, or WebP photo of up to 8 MB, or choose one of the three bundled sample looks. The face should have visible eyes and lips. The app rejects very small, very large, or unsuitable images. The first analysis can be slower while the server downloads model files.
+Upload a front-facing JPEG, PNG, or WebP photo of up to 8 MB, or choose one of the three bundled sample looks. The face should have visible eyes and lips. The app rejects very small, very large, or unsuitable images. The first analysis can be slower while the server initializes the bundled model.
 
 This photo supplies **visible colors**, not a verified list of products used on that person.
 
