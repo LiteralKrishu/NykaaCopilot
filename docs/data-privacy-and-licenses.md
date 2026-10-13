@@ -9,14 +9,14 @@ This page describes the code's current data flow. It is a technical inventory, n
 | Inspiration upload or preset | Browser to local `POST /api/analyze`; decoded and processed by the Node.js route | Analysis results clear when the workflow resets. A source object URL can remain in browser memory until another image replaces it or the page reloads; upload bytes are not intentionally written to the app's data files |
 | Selfie upload | Browser-side MediaPipe and Canvas | Object URL exists during try-on, then is revoked; a saved PNG snapshot remains in React state until reset/reload |
 | Camera frames | Browser MediaPipe and Canvas | Frames are not sent to an app endpoint or saved; a user-created snapshot stays in React state |
-| Face parser model files | Downloaded from the Hugging Face Hub on first analysis | Cached by Transformers.js on the server filesystem |
+| Face parser model files | Downloaded from the Hugging Face Hub during development setup or the production build | Pinned and hash-checked model files are packaged with the server function; analysis does not download them at request time |
 | Face landmark model and MediaPipe WASM | Served from this app's `public/` directory | Bundled with the project |
 
 The code does not submit photos to the Hugging Face hosted inference API or to ModiFace. It does not include a Hugging Face key. Public model downloads and package installation still make external network requests. An internet-facing deployment would send inspiration photos to whatever server hosts `/api/analyze`; do not assume the server is on the user's own device outside the local demo.
 
 ## Bag and session
 
-`GET /api/cart` sets an HTTP-only, SameSite=Lax session cookie named `nykaa_demo_session`. The cookie contains a random UUID, not the cart contents. `PUT /api/cart` writes product IDs, shade IDs, and quantities under that UUID in `.data/carts.json`. The file is ignored by Git. Its contents have no automatic expiry or cleanup even though the cookie expires after 30 days. The cart implementation is meant for one local app instance; it has no login, user ownership checks, database, encryption-at-rest configuration, or production concurrency guarantees across multiple server processes.
+`GET /api/cart` sets an HTTP-only, SameSite=Lax cookie named `nykaa_demo_cart`. The cookie contains product IDs, shade IDs, and quantities encoded as Base64URL, which is not encryption. `PUT /api/cart` validates and replaces these lines. The cookie expires after 30 days and is specific to one browser. The demo bag has no login, account ownership, or checkout.
 
 ## Model and content terms
 

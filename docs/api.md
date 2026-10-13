@@ -31,6 +31,8 @@ curl -F 'image=@/absolute/path/to/portrait.jpg' http://localhost:3000/api/analyz
 
 Accepted MIME types are `image/jpeg`, `image/png`, and `image/webp`; file size must be 1 byte through 8 MB. Decoded dimensions must be 128–4096 pixels in each direction. Successful responses have this shape:
 
+Vercel accepts function request bodies up to 4.5 MB. The storefront resizes larger selected images before posting them. Direct callers of the deployed endpoint must keep the multipart request below that limit.
+
 ```ts
 type LookAnalysis = {
   model: string;
@@ -67,7 +69,7 @@ The nine `MakeupZone` values are `lips`, `eyeshadow`, `eyeliner`, `mascara`, `br
 
 ## `GET /api/cart` and `PUT /api/cart`
 
-Both use an HTTP-only `nykaa_demo_session` cookie. `GET` returns `{ "lines": CartLine[] }` and creates a session cookie when needed. `PUT` **replaces** the entire session bag with the supplied lines and returns the validated result:
+Both use an HTTP-only `nykaa_demo_cart` cookie. `GET` returns `{ "lines": CartLine[] }` and creates a bag cookie when needed. `PUT` **replaces** the entire bag with the supplied lines and returns the validated result:
 
 ```json
 {
@@ -77,6 +79,6 @@ Both use an HTTP-only `nykaa_demo_session` cookie. `GET` returns `{ "lines": Car
 }
 ```
 
-Every product and shade pair must exist; quantity must be an integer from 1 to 99; there can be at most 50 lines. Invalid JSON, shape, product, shade, or quantity returns HTTP 400. The server stores session bags in `.data/carts.json`. There is no checkout endpoint.
+Every product and shade pair must exist; quantity must be an integer from 1 to 99; there can be at most 50 lines. Invalid JSON, shape, product, shade, quantity, or an oversized cookie returns HTTP 400. The bag is stored in the cookie, so it is specific to one browser. There is no checkout endpoint.
 
 The cookie is `SameSite=Lax`, `HttpOnly`, valid for 30 days, and `Secure` when `NODE_ENV=production`. The bag is local demo storage, not a production session or account system. See [Data, privacy, and licenses](data-privacy-and-licenses.md).

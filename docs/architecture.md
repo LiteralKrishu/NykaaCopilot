@@ -9,24 +9,25 @@ flowchart LR
   Catalog[data/catalog.json and data/presets.json] --> Home
   UI -->|inspiration image| Analyze[POST /api/analyze]
   Analyze --> Parser[Transformers.js face parser]
-  Parser -->|model files, first use| Hub[Hugging Face Hub]
+  Hub[Hugging Face Hub] -->|pinned model, build time| Bundle[Function package]
+  Bundle --> Parser
   Analyze --> Match[Pixel sampling and CIEDE2000 matching]
   Catalog --> Match
   Match --> UI
   UI -->|selfie or camera| TryOn[Browser MediaPipe + Canvas]
   Assets[Local face landmark model and WASM] --> TryOn
   UI -->|GET or PUT| Cart[Cart API]
-  Cart --> Store[.data/carts.json]
+  Cart --> Store[HTTP-only browser cookie]
 ```
 
 ## Runtime boundaries
 
 - **Server-rendered entry:** `src/app/page.tsx` imports the catalog and presets, then renders `Storefront`. `src/app/layout.tsx` supplies metadata and CSS.
 - **Browser UI:** `src/components/Storefront.tsx` manages search, category filter, wizard steps, selected matches, snapshots, and bag state. `OriginalStorefrontTop.tsx` renders the header, hero, and feature banner.
-- **Server analysis:** `src/app/api/analyze/route.ts` validates the upload and calls `src/lib/analysis.ts`. This runs in the Node.js runtime. `next.config.ts` keeps Transformers.js external to Next's server bundle.
+- **Server analysis:** `src/app/api/analyze/route.ts` validates the upload and calls `src/lib/analysis.ts`. This runs in the Node.js runtime. The build prepares a pinned model; `next.config.ts` packages its files and the native ONNX libraries for Vercel. Remote model loading is disabled at runtime.
 - **Browser try-on:** `src/components/TryOn.tsx` loads MediaPipe, tracks one face, handles camera or selfie input, and calls `src/lib/tryon-renderer.ts` to paint the canvas.
 - **Catalog and matching:** `src/lib/catalog.ts` maps the JSON records to app types. `src/lib/matching.ts` compares measured colors with catalog swatches using functions in `src/lib/color.ts`.
-- **Demo bag:** `src/app/api/cart/route.ts` manages the session cookie. `src/lib/cart.ts` validates lines and writes `.data/carts.json`.
+- **Demo bag:** `src/app/api/cart/route.ts` stores validated lines in an HTTP-only browser cookie. `src/lib/cart.ts` validates and encodes them.
 
 ## Files and ownership
 

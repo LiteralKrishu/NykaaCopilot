@@ -5,7 +5,7 @@
 - Replaced the static HTML/CSS/JavaScript page with a React and Next.js 16 App Router application. The original prototype is preserved in `legacy/`.
 - Built a responsive storefront with product search, category filters, shade selection, inspiration looks, a guided analysis flow, bundle review, and a persistent local demo bag.
 - Added server routes for catalog search (`GET /api/products`), inspiration presets (`GET /api/presets`), image analysis (`POST /api/analyze`), and session cart reads/writes (`GET`/`PUT /api/cart`).
-- Integrated the open Hugging Face `jonathandinu/face-parsing` model in quantized ONNX form. It segments facial parts and drives actual pixel sampling for nine makeup areas. The first analysis downloads about 90 MB of model weights; subsequent calls reuse the local cache.
+- Integrated the open Hugging Face `jonathandinu/face-parsing` model in quantized ONNX form. It segments facial parts and drives actual pixel sampling for nine makeup areas. The build prepares a pinned, hash-checked 85 MB model, which is loaded locally during analysis.
 - Ranked catalog swatches within their product categories using CIEDE2000 color distance, with a cutoff for distant colors.
 - Added MediaPipe face landmark try-on for camera and selfie images, with nine adjustable layers, snapshot review, and bundle-to-bag flow. Landmark model and WASM assets are served locally from `public/`.
 - Reworked try-on to composite makeup into the source image using texture-preserving color, soft-light, multiply, and screen blends. Lips, brows, foundation, and eye regions follow the tracked contours; blush, contour, shadow, and highlight have feathered placement. Eyeliner tapers across the lid and mascara adds individual lash strokes.
@@ -29,4 +29,4 @@
 - The inherited 12-product catalog has approximate swatches, unverified product copy/photos, no brow/contour/highlighter products, and no live store feed or checkout. Missing and distant matches are withheld.
 - Live camera behavior was not exercised in the browser walkthrough because it requires camera access. Selfie try-on was exercised.
 - The upgraded renderer is a landmark-based color preview, not a learned photorealistic makeup transfer model. Fine hair occlusion, eyelash detail, and exact product finish will vary with pose and lighting.
-- The cart uses a local JSON file and is intended for a single local app instance. This is a project demo rather than a deployed commerce system.
+- The cart uses an HTTP-only browser cookie. This is a project demo rather than a deployed commerce system.

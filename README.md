@@ -13,14 +13,18 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`. The first image analysis downloads the `jonathandinu/face-parsing` quantized ONNX model from Hugging Face (about 90 MB) into the Transformers.js cache. Later runs use the cache. The MediaPipe face landmark model and WASM files are bundled in `public/` so the try-on does not need a third-party asset request. Camera mode requires browser camera permission; selfie mode does not.
+Open `http://localhost:3000`. The dev and production build commands prepare a pinned copy of the `jonathandinu/face-parsing` quantized ONNX model (about 85 MB) before starting Next.js. The first preparation needs internet access; later runs reuse the local copy. The MediaPipe face landmark model and WASM files are bundled in `public/` so the try-on does not need a third-party asset request. Camera mode requires browser camera permission; selfie mode does not.
 
 ## What works
 
 - React storefront with search, category filters, shade selection, responsive layout, and a local demo bag.
 - `POST /api/analyze`: accepts JPEG, PNG, or WebP up to 8 MB; segments facial parts using an open Hugging Face model; samples visible region colors; returns estimates for lips, eyeshadow, eyeliner, mascara, brows, blush, contour, highlighter, and foundation. It rejects images without a clear face.
 - Shade ranking uses CIEDE2000 color distance and returns close catalog swatches by makeup category. Distant shades are withheld.
-- `GET /api/products`, `GET /api/presets`, and `GET`/`PUT /api/cart` serve the storefront. The cart is saved in `.data/carts.json`, keyed by an HTTP-only session cookie. It is intended for one local app instance.
+- `GET /api/products`, `GET /api/presets`, and `GET`/`PUT /api/cart` serve the storefront. The demo bag is saved in an HTTP-only cookie in the user's browser.
+
+## Vercel deployment
+
+Use `npm run build` as the Vercel Build Command. It downloads and verifies the pinned face model during the build, then packages it with the Linux ONNX runtime files in the analysis function. The function loads model files locally and does not download them when a visitor requests analysis. Build-time access to Hugging Face is required. Vercel limits function request bodies to 4.5 MB; the browser resizes images above 4 MB before uploading. The demo bag is stored in a browser cookie and does not require writable server storage.
 - Try-on uses MediaPipe face landmarks for a live camera or selfie. It draws separate layers for lips, eyelids, liner, lashes, brows, blush, contour, highlight, and base; each layer can be toggled. Snapshots can be reviewed before adding the matched bundle to the bag.
 
 ## Important limits

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { analyzeImage } from "@/lib/analysis";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -17,6 +16,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Image must be between 1 byte and 8 MB." }, { status: 413 });
   }
   try {
+    const { analyzeImage } = await import("@/lib/analysis");
     const result = await analyzeImage(new Uint8Array(await image.arrayBuffer()), image.type);
     return NextResponse.json(result);
   } catch (error) {
